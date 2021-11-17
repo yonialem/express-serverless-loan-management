@@ -1,0 +1,50 @@
+service: Loan
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      migrate: true
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: us-east-2
+  apiName: Loan
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+        - { "Fn::GetAtt": ["LoansDynamoDBTable", "Arn" ] }
+
+functions:
+  app:
+      handler: src/http.handler
+      events:
+        - http: ANY /
+        - http: 'ANY {proxy+}'
+  auth:
+      handler: src/http.handler
+      events:
+        - http: 'ANY /auth'
+
+  loan:
+    handler: src/http.handler
+    events:
+      - http: 'ANY /loan'
+
+
+resources: ${file(./src/Resources.yml)}

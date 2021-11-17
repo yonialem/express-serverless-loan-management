@@ -1,0 +1,33 @@
+{
+  "name": "Loan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serverless offline",
+    "dynamodb": "C: && cd C:\\Program Files\\AWS\\dynamodb\\ && java -D\"java.library.path\"=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb",
+    "admin": "dynamodb-admin"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.831.0",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dynamodb-local": "0.0.31",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "serverless-http": "^2.7.0",
+    "synapsenode": "^1.2.13",
+    "twilio": "^3.55.0"
+  },
+  "devDependencies": {
+    "serverless": "^2.20.1",
+    "serverless-dynamodb-local": "^0.2.24",
+    "serverless-offline": "^6.9.0"
+  }
+}
